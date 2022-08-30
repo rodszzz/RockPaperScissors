@@ -38,47 +38,54 @@ function playRound(playerSelection, computerSelection) {
 
   // only for debug purposes
   // but i'll keep it because i think its cooler with it
-  log(`You chose: ${playerSelection}`);
+  // log(`You chose: ${playerSelection}`);
 
   // beeg switch function so it's readable
   // easier to debug for me and not too much spaghetti
   switch (true) {
     case computerSelection === playerSelection:
-      log(`${computerSelection} does nothing to ${playerSelection}\nDRAW!`);
+      results.innerHTML = `${computerSelection} does nothing to ${playerSelection}\nDRAW!`;
       break;
 
     case computerSelection === "rock" && playerSelection === "scissors":
-      log(`${computerSelection} beats ${playerSelection}\nComputer Wins!`);
-      scorePC += 1;
+      results.innerHTML = `${computerSelection} beats ${playerSelection}\nComputer Wins!`;
+      score.innerHTML = `You: ${scorePlayer} </br> Computer: ${(scorePC += 1)}`;
+      // scorePC += 1;
       break;
 
     case computerSelection === "rock" && playerSelection === "paper":
-      log(`${playerSelection} beats ${computerSelection}\nYou Win!`);
-      scorePlayer += 1;
+      results.innerHTML = `${playerSelection} beats ${computerSelection}\nYou Win!`;
+      score.innerHTML = `You: ${(scorePlayer += 1)} </br> Computer: ${scorePC}`;
+      // scorePlayer += 1;
       break;
 
     case computerSelection === "paper" && playerSelection === "scissors":
-      log(`${playerSelection} beats ${computerSelection}\nYou Win!`);
-      scorePlayer += 1;
+      results.innerHTML = `${playerSelection} beats ${computerSelection}\nYou Win!`;
+      score.innerHTML = `You: ${(scorePlayer += 1)} </br> Computer: ${scorePC}`;
+      // scorePlayer += 1;
       break;
 
     case computerSelection === "paper" && playerSelection === "rock":
-      log(`${computerSelection} beats ${playerSelection}\nComputer Wins!`);
-      scorePC += 1;
+      results.innerHTML = `${computerSelection} beats ${playerSelection}\nComputer Wins!`;
+      score.innerHTML = `You: ${scorePlayer} </br> Computer: ${(scorePC += 1)}`;
+      // scorePC += 1;
       break;
 
     case computerSelection === "scissors" && playerSelection === "rock":
-      log(`${playerSelection} beats ${computerSelection}\nYou Win!`);
-      scorePlayer += 1;
+      results.innerHTML = `${playerSelection} beats ${computerSelection}\nYou Win!`;
+      score.innerHTML = `You: ${(scorePlayer += 1)} </br> Computer: ${scorePC}`;
+      // scorePlayer += 1;
       break;
 
     case computerSelection === "scissors" && playerSelection === "paper":
-      log(`${computerSelection} beats ${playerSelection}\nComputer Wins!`);
-      scorePC += 1;
+      results.innerHTML = `${computerSelection} beats ${playerSelection}\nComputer Wins!`;
+      score.innerHTML = `You: ${scorePlayer} </br> Computer: ${(scorePC += 1)}`;
+      // scorePC += 1;
       break;
 
     default:
-      log(`ERROR\nPC:${computerSelection}\nYOU:${playerSelection}`);
+      // idk if it will ever occur, but i'll keep it here
+      results.innerHTML = `ERROR\nPC:${computerSelection}\nYOU:${playerSelection}`;
       break;
   }
 }
@@ -86,25 +93,36 @@ function playRound(playerSelection, computerSelection) {
 function game() {
   // calls playRound to play a round
   // use a for loop to play 5 rounds
-  for (let i = 0; i < 5; i++) {
+  /* for (let i = 0; i < 5; i++) {
     // gets user input
     let playerSelection = prompt("Rock | Paper | Scissors: ");
     playRound(playerSelection, computerPlay());
   }
-
   // log the score of the player and computer
   log(`-----------------------------\nComputer: ${scorePC}`);
-  log(`Player: ${scorePlayer}`);
-
+  log(`Player: ${scorePlayer}`); */
   // check who won and output it
+  // idk how to get this workng
   if (scorePC > scorePlayer) {
-    log("YOU LOOOOOOOOOOOOOOOSE NEEEEEEEEEEEEEEEEEEEEERD");
+    final.innerHTML = "YOU LOOOOOOOOOOOOOOOSE NEEEEEEEEEEEEEEEEEEEEERD";
   } else if (scorePC < scorePlayer) {
-    log("Congrats dud, you win :)");
+    final.innerHTML = "Congrats dud, you win :)";
   } else {
-    log("DRAW, best luck next time :)");
+    final.innerHTML = "DRAW, best luck next time :)";
   }
 }
+
+const pedra = document.querySelector(".pedra");
+const papel = document.querySelector(".papel");
+const tesoura = document.querySelector(".tesoura");
+
+pedra.addEventListener("click", () => playRound("rock", computerPlay()));
+papel.addEventListener("click", () => playRound("paper", computerPlay()));
+tesoura.addEventListener("click", () => playRound("scissors", computerPlay()));
+
+const score = document.querySelector(".score");
+const results = document.querySelector(".results");
+const final = document.querySelector(".final");
 
 // finally play the game
 game();
