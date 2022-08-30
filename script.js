@@ -125,4 +125,4 @@ const results = document.querySelector(".results");
 const final = document.querySelector(".final");
 
 // finally play the game
-game();
+// game();
